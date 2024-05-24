@@ -1,0 +1,26 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Course modules" %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Course modules</h1>
+  </div>
+
+  <div id="course_modules" class="min-w-full">
+    <% @course_modules.each do |course_module| %>
+      <%= render course_module %>
+      <% if course_module.user_enrolled?(current_user) %>
+      <p>
+        <%= link_to "Show this course module", course_module, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      </p>
+      <% else %>
+      <p>
+        <%= link_to "Enroll to this course module",  course_module_enroll_to_course_module_path(course_module), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      </p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :lessons
+  resources :course_modules do
+    get :enroll_to_course_module
+  end
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,6 +12,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   devise_scope :user do
-    root to: "devise/sessions#new"
+    root to: "course_modules#index"
   end
 end
