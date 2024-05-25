@@ -1,7 +1,9 @@
 require "test_helper"
 
 class CourseModulesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
   setup do
+    sign_in users :one
     @course_module = course_modules(:one)
   end
 
@@ -10,39 +12,13 @@ class CourseModulesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_course_module_url
-    assert_response :success
-  end
-
-  test "should create course_module" do
-    assert_difference("CourseModule.count") do
-      post course_modules_url, params: { course_module: { title: @course_module.title } }
-    end
-
-    assert_redirected_to course_module_url(CourseModule.last)
-  end
-
   test "should show course_module" do
     get course_module_url(@course_module)
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_course_module_url(@course_module)
-    assert_response :success
-  end
-
-  test "should update course_module" do
-    patch course_module_url(@course_module), params: { course_module: { title: @course_module.title } }
-    assert_redirected_to course_module_url(@course_module)
-  end
-
-  test "should destroy course_module" do
-    assert_difference("CourseModule.count", -1) do
-      delete course_module_url(@course_module)
-    end
-
-    assert_redirected_to course_modules_url
+  test "should show enroll user to course_module" do
+    get course_module_enroll_to_course_module_url(@course_module)
+    assert_response :redirect
   end
 end

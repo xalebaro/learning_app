@@ -16,7 +16,7 @@ end
   prerequisite = if CourseModule.first.lessons.count == 0
     nil
   else
-    Lesson.last
+    CourseModule.first.lessons.last
   end
   Lesson.create(title: "Jazz Scale #{index}", course_module: CourseModule.first, content: "Jazz is a music genre that originated in the African-American communities of New Orleans, Louisiana, in the late 19th and early 20th centuries, with its roots in blues, ragtime, European harmony and African rhythmic rituals.[1][2][3][4][5][6] Since the 1920s Jazz Age, it has been recognized as a major form of musical expression in traditional and popular music. Jazz is characterized by swing and blue notes, complex chords, call and response vocals, polyrhythms and improvisation.", prerequisite: prerequisite)
 end
@@ -25,7 +25,7 @@ end
   prerequisite = if CourseModule.second.lessons.count == 0
     nil
   else
-    Lesson.last
+    CourseModule.second.lessons.last
   end
   Lesson.create(title: "Jazz Chord # #{index}", course_module: CourseModule.second, content: "Jazz is a music genre that originated in the African-American communities of New Orleans, Louisiana, in the late 19th and early 20th centuries, with its roots in blues, ragtime, European harmony and African rhythmic rituals.[1][2][3][4][5][6] Since the 1920s Jazz Age, it has been recognized as a major form of musical expression in traditional and popular music. Jazz is characterized by swing and blue notes, complex chords, call and response vocals, polyrhythms and improvisation.", prerequisite: prerequisite)
 end

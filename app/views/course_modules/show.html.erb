@@ -6,7 +6,7 @@
 
     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900"><%= @course_module.title %></h2>
       <%= @course_module.progress(current_user) %>
-    <% if @course_module.completed(current_user) %>
+    <% if @course_module.completed?(current_user) %>
     <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Module Completed</span>
     <% end %>
     <p>

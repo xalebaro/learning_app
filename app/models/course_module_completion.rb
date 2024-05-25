@@ -4,7 +4,7 @@ class CourseModuleCompletion < ApplicationRecord
   has_many :lesson_completions, dependent: :destroy
 
   def lessons_completed
-    lesson_completions.where(completed: true).count
+    lesson_completions.where.not(completed_at: nil).count
   end
 
   def self.enroll_user(user, course_module)
@@ -14,9 +14,7 @@ class CourseModuleCompletion < ApplicationRecord
     end
   end
 
-  def complete
-    self.completed_at = Time.zone.now
-    self.completed = true
-    save
+  def completed
+    lesson_completions.all?(&:completed)
   end
 end

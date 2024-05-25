@@ -10,12 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_24_233507) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_25_002632) do
   create_table "course_module_completions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "course_module_id", null: false
-    t.boolean "completed", default: false, null: false
-    t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_module_id"], name: "index_course_module_completions_on_course_module_id"
@@ -31,7 +29,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_233507) do
   create_table "lesson_completions", force: :cascade do |t|
     t.integer "course_module_completion_id", null: false
     t.integer "lesson_id", null: false
-    t.boolean "completed", default: false, null: false
     t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

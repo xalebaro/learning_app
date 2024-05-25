@@ -3,7 +3,7 @@ class Lesson < ApplicationRecord
   belongs_to :prerequisite, class_name: "Lesson", optional: true
 
   def completed_by_user(user)
-    course_module.completion(user).lesson_completions.where(lesson: self).first.completed
+    course_module.completion(user)&.lesson_completions&.where(lesson: self)&.first&.completed
   end
 
   def complete(user)

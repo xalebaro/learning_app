@@ -7,3 +7,4 @@ one:
 two:
   content: MyText
   course_module: two
+  prerequisite: one

@@ -17,7 +17,7 @@ class CourseModule < ApplicationRecord
     user.course_module_completions.where(course_module: self).first
   end
 
-  def completed(user)
-    completion(user).completed
+  def completed?(user)
+    completion(user)&.completed
   end
 end

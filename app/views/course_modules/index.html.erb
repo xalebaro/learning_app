@@ -14,7 +14,7 @@
     <div id="course_modules" class="min-w-full">
       <% @course_modules.each do |course_module| %>
         <%= render course_module %>
-        <% unless course_module.completed(current_user) %>
+        <% unless course_module.completed?(current_user) %>
           <% if course_module.user_enrolled?(current_user) %>
           <p>
             <%= link_to "Take this course module", course_module, class: "actions group relative w-full flex

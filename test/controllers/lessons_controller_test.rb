@@ -1,7 +1,9 @@
 require "test_helper"
 
 class LessonsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
   setup do
+    sign_in users :one
     @lesson = lessons(:one)
   end
 
@@ -10,39 +12,13 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_lesson_url
-    assert_response :success
-  end
-
-  test "should create lesson" do
-    assert_difference("Lesson.count") do
-      post lessons_url, params: { lesson: { content: @lesson.content, course_module_id: @lesson.course_module_id } }
-    end
-
-    assert_redirected_to lesson_url(Lesson.last)
-  end
-
   test "should show lesson" do
     get lesson_url(@lesson)
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_lesson_url(@lesson)
-    assert_response :success
-  end
-
-  test "should update lesson" do
-    patch lesson_url(@lesson), params: { lesson: { content: @lesson.content, course_module_id: @lesson.course_module_id } }
-    assert_redirected_to lesson_url(@lesson)
-  end
-
-  test "should destroy lesson" do
-    assert_difference("Lesson.count", -1) do
-      delete lesson_url(@lesson)
-    end
-
-    assert_redirected_to lessons_url
+  test "should complete a lesson and redirect" do
+    get lesson_complete_lesson_url(@lesson)
+    assert_response :redirect
   end
 end

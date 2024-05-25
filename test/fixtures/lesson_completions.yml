@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  course_module: one
-  completed: false
+  course_module_completion: one
   completed_at: 2024-05-24 15:27:19
+  lesson: one
 
 two:
-  course_module: two
-  completed: false
+  course_module_completion: two
   completed_at: 2024-05-24 15:27:19
+  lesson: two
