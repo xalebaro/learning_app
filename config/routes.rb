@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :lessons
+  resources :lessons do
+    get :complete_lesson
+  end
   resources :course_modules do
     get :enroll_to_course_module
   end

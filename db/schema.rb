@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_24_221735) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_24_233507) do
   create_table "course_module_completions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "course_module_id", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_221735) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "prerequisite_id"
+    t.string "title"
     t.index ["course_module_id"], name: "index_lessons_on_course_module_id"
     t.index ["prerequisite_id"], name: "index_lessons_on_prerequisite_id"
   end

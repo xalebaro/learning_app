@@ -1,12 +1,11 @@
 <div id="<%= dom_id lesson %>">
-  <p class="my-5">
+  <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900"><%= lesson.course_module.title %></h2>
+  <h2 class="mt-6 text-center text-2xl font-extrabold text-gray-900"><%= lesson.title %></h2>
+  <p class="mb-3 text-gray-500 dark:text-gray-400>
     <strong class="block font-medium mb-1">Content:</strong>
     <%= lesson.content %>
   </p>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Course module:</strong>
-    <%= lesson.course_module_id %>
-  </p>
+
 
 </div>

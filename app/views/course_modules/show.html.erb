@@ -4,12 +4,38 @@
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
 
-    <%= render @course_module %>
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900"><%= @course_module.title %></h2>
+      <%= @course_module.progress(current_user) %>
+    <% if @course_module.completed(current_user) %>
+    <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Module Completed</span>
+    <% end %>
+    <p>
+    <%= link_to "Back to course modules", course_modules_path, class: "font-medium text-indigo-600 hover:text-indigo-500" %>
+    </p>
 
-    <%= link_to "Edit this course module", edit_course_module_path(@course_module), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to course modules", course_modules_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this course module", @course_module, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    <h3 class="mt-6 text-center text-2xl font-bold text-gray-900">Lessons</h3>
+
+    <div id="lessons" class="min-w-full">
+      <% @course_module.lessons.each do |lesson| %>
+        <p class="my-5">
+          <%= lesson.title %>
+        </p>
+        <% if lesson.completed_by_user(current_user) %>
+          <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Lesson Completed</span>
+
+        <% elsif lesson.prerequisite && !lesson.prerequisite&.completed_by_user(current_user)  %>
+          <span class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">You must take previous lessons first</span>
+        <% else %>
+        <p>
+          <%= link_to "Take this lesson", lesson, class: "actions group relative w-full flex
+        justify-center py-2 px-4 border border-transparent text-sm font-medium
+        rounded-md text-white bg-indigo-600 hover:bg-indigo-700
+        focus:outline-none focus:ring-2 focus:ring-offset-2
+        focus:ring-indigo-500" %>
+        </p>
+        <% end %>
+      <% end %>
     </div>
+
   </div>
 </div>

@@ -6,10 +6,34 @@
 
     <%= render @lesson %>
 
-    <%= link_to "Edit this lesson", edit_lesson_path(@lesson), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to lessons", lessons_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this lesson", @lesson, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-    </div>
+  <% if @lesson.completed_by_user(current_user) %>
+
+    <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Lesson Completed</span>
+    <% if @lesson.next_lesson %>
+    <p>
+      <%= link_to "Next lesson", lesson_path(@lesson.next_lesson), class: "actions group relative w-full flex
+        justify-center py-2 px-4 border border-transparent text-sm font-medium
+        rounded-md text-white bg-gray-600 hover:bg-gray-700
+        focus:outline-none focus:ring-2 focus:ring-offset-2
+        focus:ring-gray-500" %>
+    </p>
+    <% end  %>
+    <% else %>
+    <p>
+      <%= link_to "Complete lesson",  lesson_complete_lesson_path(@lesson), class: "actions group relative w-full flex
+        justify-center py-2 px-4 border border-transparent text-sm font-medium
+        rounded-md text-white bg-indigo-600 hover:bg-indigo-700
+        focus:outline-none focus:ring-2 focus:ring-offset-2
+        focus:ring-indigo-500" %>
+    </p>
+  <% end %>
+  <% if @lesson.prerequisite %>
+    <p>
+      <%= link_to "Previous Lesson", lesson_path(@lesson.prerequisite), class: "font-medium text-indigo-600 hover:text-indigo-500" %>
+    </p>
+  <% end %>
+    <p>
+      <%= link_to "Back to course module", course_module_path(@lesson.course_module), class: "font-medium text-indigo-600 hover:text-indigo-500" %>
+    </p>
   </div>
 </div>

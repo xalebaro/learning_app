@@ -13,9 +13,11 @@ class CourseModule < ApplicationRecord
     !CourseModuleCompletion.where(course_module: self, user: user).empty?
   end
 
-  private
-
   def completion(user)
     user.course_module_completions.where(course_module: self).first
+  end
+
+  def completed(user)
+    completion(user).completed
   end
 end

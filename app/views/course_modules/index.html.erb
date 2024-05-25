@@ -1,26 +1,39 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
+<div class="mx-auto md:w-2/3 w-full flex">
 
-  <% content_for :title, "Course modules" %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Course modules</h1>
-  </div>
-
-  <div id="course_modules" class="min-w-full">
-    <% @course_modules.each do |course_module| %>
-      <%= render course_module %>
-      <% if course_module.user_enrolled?(current_user) %>
-      <p>
-        <%= link_to "Show this course module", course_module, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-      <% else %>
-      <p>
-        <%= link_to "Enroll to this course module",  course_module_enroll_to_course_module_path(course_module), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-      <% end %>
+  <div class="mx-auto">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
+
+    <% content_for :title, "Course modules" %>
+
+    <div class="flex justify-between items-center">
+      <h1 class="font-bold text-4xl">Course modules</h1>
+    </div>
+
+    <div id="course_modules" class="min-w-full">
+      <% @course_modules.each do |course_module| %>
+        <%= render course_module %>
+        <% unless course_module.completed(current_user) %>
+          <% if course_module.user_enrolled?(current_user) %>
+          <p>
+            <%= link_to "Take this course module", course_module, class: "actions group relative w-full flex
+          justify-center py-2 px-4 border border-transparent text-sm font-medium
+          rounded-md text-white bg-indigo-600 hover:bg-indigo-700
+          focus:outline-none focus:ring-2 focus:ring-offset-2
+          focus:ring-indigo-500" %>
+          </p>
+          <% else %>
+          <p>
+            <%= link_to "Enroll to this course module",  course_module_enroll_to_course_module_path(course_module), class: "actions group relative w-full flex
+          justify-center py-2 px-4 border border-transparent text-sm font-medium
+          rounded-md text-white bg-blue-600 hover:bg-blue-700
+          focus:outline-none focus:ring-2 focus:ring-offset-2
+          focus:ring-blue-500" %>
+          </p>
+          <% end %>
+        <% end  %>
+      <% end %>
+    </div>
   </div>
 </div>
